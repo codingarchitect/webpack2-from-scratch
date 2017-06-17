@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCssAsssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const extractLESS = new ExtractTextPlugin('styles.css');
 const loaderOptions = new webpack.LoaderOptionsPlugin({
@@ -42,6 +43,7 @@ module.exports = {
 
 if (process.env.NODE_ENV === 'production') {
   module.exports.plugins.push(
-    new webpack.optimize.UglifyJsPlugin() // call the uglify plugin
+    new webpack.optimize.UglifyJsPlugin(), // call the uglify plugin
+    new OptimizeCssAsssetsPlugin()
   );
 }
