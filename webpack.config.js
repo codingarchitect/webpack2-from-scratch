@@ -12,6 +12,9 @@ module.exports = {
           test: /\.js$/, // files ending with .js
           exclude: /node_modules/, // exclude the node_modules directory
           loader: "babel-loader" // use this (babel-core) loader
+        }, { 
+          test: /\.less$/, // files ending with .less
+          loader: ['style-loader', 'css-loader', 'less-loader'] // use the less-loader and pipe the output to css-loader and pipe that output to style-loader
         }]
     }
 };
