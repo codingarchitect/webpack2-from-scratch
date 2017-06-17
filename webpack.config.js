@@ -31,11 +31,11 @@ module.exports = {
           loader: "babel-loader" // use this (babel-core) loader
         }, { 
           test: /\.less$/, // files ending with .less
-          use: ExtractTextPlugin.extract({
+          use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({ // HMR for styles
             fallback: 'style-loader',
             //resolve-url-loader may be chained before less-loader if necessary
             use: ['css-loader', 'less-loader']
-          })
+          }))
         }, {
           test: /\.(jpe?g|png|gif|svg)$/i, // files ending with .jsx
           exclude: /node_modules/, // exclude the node_modules directory
