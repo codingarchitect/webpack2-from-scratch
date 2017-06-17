@@ -28,7 +28,7 @@ module.exports = {
         }, {
           test: /\.jsx$/, // files ending with .jsx
           exclude: /node_modules/, // exclude the node_modules directory
-          loader: "babel-loader" // use this (babel-core) loader
+          loaders: ['react-hot-loader', 'babel-loader'] // use this (babel-core) loader
         }, { 
           test: /\.less$/, // files ending with .less
           use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({ // HMR for styles
