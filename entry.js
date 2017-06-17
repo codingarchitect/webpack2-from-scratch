@@ -1,1 +1,1 @@
-document.write('Hello from webpack bundles');
+document.write(require("./content.js"));
