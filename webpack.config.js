@@ -34,7 +34,7 @@ module.exports = {
           use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({ // HMR for styles
             fallback: 'style-loader',
             //resolve-url-loader may be chained before less-loader if necessary
-            use: ['css-loader', 'less-loader']
+            use: ['css-loader', 'less-loader', 'postcss-loader']
           }))
         }, {
           test: /\.(jpe?g|png|gif|svg)$/i, // files ending with .jsx
