@@ -14,6 +14,12 @@ module.exports = {
         path: path.resolve(__dirname, './public'),
         filename: 'bundle.js'
     },
+    resolve: { // These options change how modules are resolved
+      extensions: ['.js', '.jsx', '.json', '.scss', '.css', '.jpeg', '.jpg', '.gif', '.png'], // Automatically resolve certain extensions
+      alias: { // Create aliases
+        images: path.resolve(__dirname, 'src/assets/images')  // src/assets/images alias
+      }
+    },
     module: {
         rules: [{
           test: /\.js$/, // files ending with .js
@@ -30,7 +36,32 @@ module.exports = {
             //resolve-url-loader may be chained before less-loader if necessary
             use: ['css-loader', 'less-loader']
           })
-        }]
+        }, {
+          test: /\.(jpe?g|png|gif|svg)$/i, // files ending with .jsx
+          exclude: /node_modules/, // exclude the node_modules directory
+          include: __dirname,
+          loaders: [
+            'file-loader?context=src/assets/images/&name=images/[path][name].[ext]',
+            {
+              loader: 'image-webpack-loader',
+              query: {
+                mozjpeg: {
+                  progressive: true
+                },
+                gifsicle: {
+                  interlaced: false
+                },
+                optipng: {
+                  optimizationLevel: 4
+                },
+                pngquant: {
+                  quality: '75-90',
+                  speed: 3
+                }
+              }
+            }
+          ]
+        }, ]
     },
     plugins: [
       extractLESS,
