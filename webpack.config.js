@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const extractLESS = new ExtractTextPlugin('styles.css');
 const loaderOptions = new webpack.LoaderOptionsPlugin({
@@ -28,7 +29,8 @@ module.exports = {
     },
     plugins: [
       extractLESS,
-      loaderOptions
+      loaderOptions,
+      new webpack.optimize.UglifyJsPlugin()
     ],
     devServer: {
       contentBase: path.resolve(__dirname, './public'), // A directory url to serve html content from
