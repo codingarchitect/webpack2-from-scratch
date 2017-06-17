@@ -29,8 +29,7 @@ module.exports = {
     },
     plugins: [
       extractLESS,
-      loaderOptions,
-      new webpack.optimize.UglifyJsPlugin()
+      loaderOptions
     ],
     devServer: {
       contentBase: path.resolve(__dirname, './public'), // A directory url to serve html content from
@@ -40,3 +39,9 @@ module.exports = {
     },
     devtool: 'eval-source-map' // enable dev tool for better debugging experience
 };
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports.plugins.push(
+    new webpack.optimize.UglifyJsPlugin() // call the uglify plugin
+  );
+}
