@@ -1,0 +1,15 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "linebreak-style": ["error", "windows"]
+  },
+  "settings": {
+    "import/resolver": "webpack"
+  }
+}
