@@ -1,5 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const extractLESS = new ExtractTextPlugin('styles.css');
+const loaderOptions = new webpack.LoaderOptionsPlugin({
+  debug: true
+});
 module.exports = {
     entry: './src/entry.js',
     output: {
@@ -7,16 +13,28 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
-        rules: [{ 
-          test: /\.css$/, // files ending with .css
-          loader: ['style-loader', 'css-loader'] // use this css-loader and pipe that output to style-loader
-        }, {
+        rules: [{
           test: /\.js$/, // files ending with .js
           exclude: /node_modules/, // exclude the node_modules directory
           loader: "babel-loader" // use this (babel-core) loader
         }, { 
           test: /\.less$/, // files ending with .less
-          loader: ['style-loader', 'css-loader', 'less-loader'] // use the less-loader and pipe the output to css-loader and pipe that output to style-loader
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            //resolve-url-loader may be chained before less-loader if necessary
+            use: ['css-loader', 'less-loader']
+          })
         }]
-    }
+    },
+    plugins: [
+      extractLESS,
+      loaderOptions
+    ],
+    devServer: {
+      contentBase: path.resolve(__dirname, './public'), // A directory url to serve html content from
+      historyApiFallback: true, // fallback to /index.html for Single Page Applications
+      inline: true, // inline mode (set to false to disable including client scripts like live reload)
+      open: true // open default browser while launching
+    },
+    devtool: 'eval-source-map' // enable dev tool for better debugging experience
 };
