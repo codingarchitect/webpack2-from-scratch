@@ -19,6 +19,10 @@ module.exports = {
           test: /\.js$/, // files ending with .js
           exclude: /node_modules/, // exclude the node_modules directory
           loader: "babel-loader" // use this (babel-core) loader
+        }, {
+          test: /\.jsx$/, // files ending with .jsx
+          exclude: /node_modules/, // exclude the node_modules directory
+          loader: "babel-loader" // use this (babel-core) loader
         }, { 
           test: /\.less$/, // files ending with .less
           use: ExtractTextPlugin.extract({
