@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 const home = () =>
   (<div>
+    <Helmet title="Home" />
     <h1>Home</h1>
     <ul>
       <li>

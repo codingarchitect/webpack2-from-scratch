@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Helmet from 'react-helmet';
 import { injectReducer } from 'shared/store/reducer';
 import page2Reducer from './page2.reducer';
 
 const page2 = () =>
   (<div>
+    <Helmet title="Page 2" />
     <h1>Page 2</h1>
     <Link to="/">Home</Link>
   </div>);

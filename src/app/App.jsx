@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import asyncComponent from 'shared/utils/async-component';
 
 const App = (props, context) => {
@@ -12,6 +13,10 @@ const App = (props, context) => {
   const Page2 = asyncComponent(() => import(/* webpackChunkName: "Page2" */ './pages/Page2/Page2')
     .then(module => module.default(store)), { name: 'Page2' });
   return (<div>
+    <Helmet
+      titleTemplate="Maginus OMS - %s"
+      titleAttributes={{ itemprop: 'name', lang: 'en' }}
+    />
     <Switch>
       <Route exact path="/" component={HomePage} />
       <Route path="/page1" component={Page1} />
