@@ -1,19 +1,16 @@
 import React from 'react';
-import maginus from 'images/maginus.png';
-import alibabaAmazon from 'images/alibaba-amazon.jpg';
-import payPerClick from 'images/pay-per-click.gif';
+import { Switch, Route } from 'react-router';
+import HomePage from './pages/Home/Home';
+import Page1 from './pages/Page1/Page1';
+import Page2 from './pages/Page2/Page2';
 
-const greeting = () =>
-  (<div className="container">
-    <div className="image-wrapper">
-      <img src={maginus} className="image-wrapper__image" alt="maginus" />
-    </div>
-    <div className="image-wrapper">
-      <img src={alibabaAmazon} className="image-wrapper__image" alt="alibaba amazon" />
-    </div>
-    <div className="image-wrapper">
-      <img src={payPerClick} className="image-wrapper__image" alt="pay per click" />
-    </div>
+const app = () =>
+  (<div>
+    <Switch>
+      <Route exact path="/" component={HomePage} />
+      <Route path="/page1" component={Page1} />
+      <Route path="/page2" component={Page2} />
+    </Switch>
   </div>);
 
-export default greeting;
+export default app;
