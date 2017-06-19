@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
-import { injectReducer } from 'shared/store/reducer';
+import createComponent from 'shared/utils/component-factory';
 import page2Reducer from './page2.reducer';
 
 const page2 = () =>
@@ -11,9 +11,4 @@ const page2 = () =>
     <Link to="/">Home</Link>
   </div>);
 
-const page2Factory = (store) => {
-  injectReducer(store, { key: 'page2', reducer: page2Reducer });
-  return page2;
-};
-
-export default page2Factory;
+export default store => createComponent(page2, store, 'page2', page2Reducer);
