@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
 import PropTypes from 'prop-types';
-import asyncComponent from './shared/utils/async-component';
+import asyncComponent from 'shared/utils/async-component';
 
 const App = (props, context) => {
   const store = context.store;

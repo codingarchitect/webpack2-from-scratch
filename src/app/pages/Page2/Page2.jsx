@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { injectReducer } from '../../shared/store/reducer';
+import { injectReducer } from 'shared/store/reducer';
 import page2Reducer from './page2.reducer';
 
 const page2 = () =>

@@ -15,6 +15,7 @@ module.exports = {
         filename: 'bundle.js'
     },
     resolve: { // These options change how modules are resolved
+      modules: [path.resolve(__dirname, "src", "app"), "node_modules"],
       extensions: ['.js', '.jsx', '.json', '.scss', '.css', '.jpeg', '.jpg', '.gif', '.png'], // Automatically resolve certain extensions
       alias: { // Create aliases
         images: path.resolve(__dirname, 'src/assets/images')  // src/assets/images alias
