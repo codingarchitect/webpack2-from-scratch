@@ -1,12 +1,13 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
+import { routerMiddleware } from 'react-router-redux';
 import makeRootReducer from './reducer'; // eslint-disable-line import/no-named-as-default
 
 export default (initialState = {}) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk];
+  const middleware = [thunk, routerMiddleware];
 
   // ======================================================
   // Store Enhancers
