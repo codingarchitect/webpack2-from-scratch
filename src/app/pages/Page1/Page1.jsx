@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { injectReducer } from '../../shared/store/reducer';
+import page1Reducer from './page1.reducer';
 
 const page1 = () =>
   (<div>
@@ -7,4 +9,9 @@ const page1 = () =>
     <Link to="/">Home</Link>
   </div>);
 
-export default page1;
+const page1Factory = (store) => {
+  injectReducer(store, { key: 'page1', reducer: page1Reducer });
+  return page1;
+};
+
+export default page1Factory;

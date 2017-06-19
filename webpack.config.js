@@ -9,7 +9,7 @@ const loaderOptions = new webpack.LoaderOptionsPlugin({
   debug: true
 });
 module.exports = {
-    entry: './src/entry.js',
+    entry: './src/entry.jsx',
     output: {
         path: path.resolve(__dirname, './public'),
         filename: 'bundle.js'
