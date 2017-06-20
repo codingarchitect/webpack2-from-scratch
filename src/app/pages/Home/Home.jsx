@@ -13,6 +13,9 @@ const home = () =>
       <li>
         <Link to="page2">Page 2</Link>
       </li>
+      <li>
+        <Link to="page3">Page 3</Link>
+      </li>
     </ul>
   </div>);
 

@@ -59,7 +59,7 @@ function FormLayoutComponentRenderer(props, context) {
     let childComponents = getChildComponents(components, props);
     if (!childComponents) childComponents = [];
     const renderedComponents = componentsInThisTemplate
-      .concat(childComponents)
+      // .concat(childComponents)
       .map((component) => {
         const ComponentElem = component.renderer;
         return (
