@@ -12,8 +12,10 @@ export default (initialState = {}) => {
   // The line below cost me a 3-4 hours.
   // If the routerMiddleware is included then none of the reducers execute
   // const middleware = [loggerMiddleware, thunk, routerMiddleware];
-  const middleware = [loggerMiddleware, thunk];
-
+  const middleware = [thunk];
+  if (process.env.NODE_ENV !== 'production') {
+    middleware.push(loggerMiddleware);
+  }
   // ======================================================
   // Store Enhancers
   // ======================================================
