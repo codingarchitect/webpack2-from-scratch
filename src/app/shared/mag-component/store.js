@@ -49,6 +49,8 @@ function componentExists(state, id) {
 }
 
 const childComponentIds = (state, action) => {
+  const childComponentId = state.find(componentId => componentId === action.payload.childId);
+  if (childComponentId) return state;
   switch (action.type) {
     case REGISTER_AS_CHILD_COMPONENT:
       return [...state, action.payload.childId];
@@ -84,7 +86,6 @@ const component = (state, action) => {
 };
 
 export default function componentReducer(state = {}, action) {
-  debugger // eslint-disable-line
   if (!action.payload) return state;
   const id = action.payload.id || action.payload.parentId;
   if (typeof id === 'undefined') {

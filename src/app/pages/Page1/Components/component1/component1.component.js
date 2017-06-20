@@ -1,12 +1,12 @@
 import page1Component1 from './component1';
 
 export const componentMetadata = {
-  id: 'oms/page1/component1',
+  id: 'oms-web-app/page1/component1',
   name: 'Page1Component1',
   displayName: 'Page 1 Component 1',
   sequence: 1,
   active: true,
-  childPluginIds: [],
+  childComponentIds: [],
   renderer: page1Component1,
 };
 

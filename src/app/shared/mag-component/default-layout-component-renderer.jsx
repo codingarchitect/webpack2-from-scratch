@@ -5,9 +5,10 @@ function DefaultLayoutComponentRenderer(props, context) {
   const components = Object.values(context.store.getState().components);
   if (props.componentState && props.componentId) {
     const thisComponentState = props.componentState[props.componentId];
-    const renderedComponents = components
+    const filteredComponents = components
       .filter(component =>
-        thisComponentState.childComponentNames.find(childId => childId === component.id))
+        thisComponentState.childComponentIds.find(childId => childId === component.id));
+    const renderedComponents = filteredComponents
       .map((component) => {
         const ComponentElem = component.renderer;
         return (

@@ -5,7 +5,7 @@ import createComponent from 'shared/mag-component/component-factory';
 import extensibleComponent from 'shared/mag-component/extensible-component';
 import page2Reducer from './page2.reducer';
 
-const componentId = 'oms-web-app/Page2';
+const componentId = 'oms-web-app/page2';
 
 const page2 = () =>
   (<div>
@@ -22,7 +22,7 @@ export const componentMetadata = {
   displayName: 'Page 2',
   sequence: 2,
   active: true,
-  childPluginIds: [],
+  childComponentIds: [],
   renderer: Page2Container,
 };
 

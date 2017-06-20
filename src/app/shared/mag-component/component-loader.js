@@ -9,10 +9,9 @@ const loadComponents = (store, context) => {
     const componentMetadata = componentModule.componentMetadata;
     if (componentMetadata) {
       components.push(componentMetadata);
-      debugger // eslint-disable-line
       store.dispatch(registerComponent(componentMetadata));
     } else {
-      console.error('A component must export a constant componentMetadata.');
+      console.error('A component must export a constant componentMetadata.'); // eslint-disable-line
     }
   });
   return components;
@@ -28,7 +27,7 @@ const loadComponentLinks = (store, context) => {
       store.dispatch(
         registerAsChildComponent(componentLinkMetadata.parentId, componentLinkMetadata.childId));
     } else {
-      console.error('A componentLink must export a constant componentLinkMetadata.');
+      console.error('A componentLink must export a constant componentLinkMetadata.'); // eslint-disable-line
     }
   });
   return componentLinks;
