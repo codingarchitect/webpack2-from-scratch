@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import asyncComponent from 'shared/utils/async-component';
 import componentReducer from 'shared/mag-component/store';
 import { injectReducer } from 'shared/store/reducer';
@@ -20,11 +21,13 @@ const App = (props, context) => {
       titleTemplate="Maginus OMS - %s"
       titleAttributes={{ itemprop: 'name', lang: 'en' }}
     />
-    <Switch>
-      <Route exact path="/" component={HomePage} />
-      <Route path="/page1" component={Page1} />
-      <Route path="/page2" component={Page2} />
-    </Switch>
+    <MuiThemeProvider>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/page1" component={Page1} />
+        <Route path="/page2" component={Page2} />
+      </Switch>
+    </MuiThemeProvider>
   </div>);
 };
 
