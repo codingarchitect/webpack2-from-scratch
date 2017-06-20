@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Tab } from 'material-ui/Tabs';
+import { Card, CardHeader, CardText } from 'material-ui/Card';
 
-function TabLayoutComponentRenderer(props, context) {
+function PanelLayoutComponentRenderer(props, context) {
   const components = Object.values(context.store.getState().components);
   if (props.componentState && props.componentId) {
     const thisComponentState = props.componentState[props.componentId];
@@ -12,15 +12,18 @@ function TabLayoutComponentRenderer(props, context) {
       .map((component) => {
         const ComponentElem = component.renderer;
         return (
-          <Tab label={component.displayName} actAsExpander showExpandableButton>
-            <ComponentElem />
-          </Tab>
+          <Card>
+            <CardHeader title={component.displayName} actAsExpander showExpandableButton />
+            <CardText expandable key={component.id}>
+              <ComponentElem />
+            </CardText>
+          </Card>
         );
       });
     return (
-      <Tabs>
+      <div className="component-items">
         { renderedComponents }
-      </Tabs>
+      </div>
     );
   }
   return (
@@ -30,13 +33,13 @@ function TabLayoutComponentRenderer(props, context) {
   );
 }
 
-TabLayoutComponentRenderer.contextTypes = {
+PanelLayoutComponentRenderer.contextTypes = {
   store: PropTypes.object,
 };
 
-TabLayoutComponentRenderer.propTypes = {
+PanelLayoutComponentRenderer.propTypes = {
   componentState: PropTypes.object.isRequired, // eslint-disable-line
   componentId: PropTypes.string.isRequired,
 };
 
-export default TabLayoutComponentRenderer;
+export default PanelLayoutComponentRenderer;
