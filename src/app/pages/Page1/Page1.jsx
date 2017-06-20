@@ -14,7 +14,7 @@ const page1 = () =>
     <Link to="/">Home</Link>
   </div>);
 
-const Page1Container = extensibleComponent(page1, componentId, 'Default');
+const Page1Container = extensibleComponent(page1, componentId, 'Panel');
 
 export const componentMetadata = {
   id: componentId,

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DefaultLayoutComponentRenderer from './default-layout-component-renderer';
 import FormLayoutComponentRenderer from './form-layout-component-renderer';
+import PanelLayoutComponentRenderer from './panel-layout-component-renderer';
 
 const mapStateToProps = (state) => {
   if (!state) return ({ componentState: {} });
@@ -13,6 +14,7 @@ const mapStateToProps = (state) => {
 const rendererFor = {
   Default: DefaultLayoutComponentRenderer,
   Form: FormLayoutComponentRenderer,
+  Panel: PanelLayoutComponentRenderer,
 };
 
 function extensibleComponent(ComponentToExtend, componentId, layout, formControls) {
