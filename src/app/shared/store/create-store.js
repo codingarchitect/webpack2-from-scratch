@@ -8,6 +8,9 @@ export default (initialState = {}) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
+  // THe routerMiddleware is buggy,
+  // The line below cost me a 3-4 hours.
+  // If the routerMiddleware is included then none of the reducers execute
   // const middleware = [loggerMiddleware, thunk, routerMiddleware];
   const middleware = [loggerMiddleware, thunk];
 
