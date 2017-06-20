@@ -12,9 +12,9 @@ function PanelLayoutComponentRenderer(props, context) {
       .map((component) => {
         const ComponentElem = component.renderer;
         return (
-          <Card>
+          <Card key={component.id}>
             <CardHeader title={component.displayName} actAsExpander showExpandableButton />
-            <CardText expandable key={component.id}>
+            <CardText expandable>
               <ComponentElem />
             </CardText>
           </Card>
