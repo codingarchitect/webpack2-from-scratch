@@ -23,6 +23,10 @@ module.exports = {
     },
     module: {
         rules: [{
+          test: /\.rt$/, // files ending with .rt
+          exclude: /node_modules/, // exclude the node_modules directory
+          loader: 'react-templates-loader?modules=commonjs' // use this react-templates-loader
+        },{
           test: /\.js$/, // files ending with .js
           exclude: /node_modules/, // exclude the node_modules directory
           loader: "babel-loader" // use this (babel-core) loader

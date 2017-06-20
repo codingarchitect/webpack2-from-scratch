@@ -1,5 +1,3 @@
-import React from 'react';
-
-const page1Component1 = () => <h2>Page 1 Component 1</h2>;
+import page1Component1 from './component1.rt';
 
 export default page1Component1;
