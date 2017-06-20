@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
-import createComponent from 'shared/utils/component-factory';
+import createComponent from 'shared/mag-component/component-factory';
 import page2Reducer from './page2.reducer';
 
 const page2 = () =>
@@ -11,4 +11,18 @@ const page2 = () =>
     <Link to="/">Home</Link>
   </div>);
 
-export default store => createComponent(page2, store, 'page2', page2Reducer);
+const pageCreationParams = {
+  pageComponent: page2,
+  pageReducer: {
+    key: 'page2',
+    reducer: page2Reducer,
+  },
+  contexts: {
+    component: require.context('./Components/', true, /component.js/),
+    link: require.context('./Component-Links/', true, /link.js/),
+  },
+};
+export default (store) => {
+  pageCreationParams.store = store;
+  return createComponent(pageCreationParams);
+};
