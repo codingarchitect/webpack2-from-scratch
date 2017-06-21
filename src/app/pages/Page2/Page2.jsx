@@ -1,10 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
-import extensibleComponent from 'shared/mag-component/extensible-component';
 import page2Reducer from './page2.reducer';
-
-const componentId = 'oms-web-app/page2';
 
 const page2 = () =>
   (<div>
@@ -13,16 +10,14 @@ const page2 = () =>
     <Link to="/">Home</Link>
   </div>);
 
-const Page2Container = extensibleComponent(page2, componentId, 'Tab');
-
 export const componentMetadata = {
-  id: componentId,
+  id: 'oms-web-app/page2',
   name: 'Page2',
   displayName: 'Page 2',
   sequence: 2,
   active: true,
   childComponentIds: [],
-  renderer: Page2Container,
+  renderer: page2,
 };
 
 const pageCreationParams = {
@@ -31,6 +26,7 @@ const pageCreationParams = {
     key: 'page2',
     reducer: page2Reducer,
   },
+  layout: 'Tab',
   contexts: {
     component: require.context('./Components/', true, /component.js/),
     link: require.context('./Component-Links/', true, /link.js/),
