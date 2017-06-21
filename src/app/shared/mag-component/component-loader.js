@@ -1,4 +1,5 @@
 import { registerComponent, registerAsChildComponent } from './store';
+import extensibleComponent from './extensible-component';
 
 const requireAll = context => context.keys().map(context);
 
@@ -9,6 +10,13 @@ const loadComponents = (store, context) => {
     const componentMetadata = componentModule.componentMetadata;
     if (componentMetadata) {
       components.push(componentMetadata);
+      if (componentMetadata.extensible) {
+        componentMetadata.renderer =
+          extensibleComponent(
+            componentMetadata.renderer,
+            componentMetadata.id,
+            componentMetadata.layout);
+      }
       store.dispatch(registerComponent(componentMetadata));
     } else {
       console.error('A component must export a constant componentMetadata.'); // eslint-disable-line

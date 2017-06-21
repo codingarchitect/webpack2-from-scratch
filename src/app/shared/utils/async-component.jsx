@@ -21,7 +21,7 @@ export default (loader, collection, store) => (
               extensibleComponent(
                 result.pageComponent.renderer,
                 result.pageComponent.id,
-                result.layout);
+                result.pageComponent.layout);
             createPageComponent(result);
           }
           const Component = result.pageComponent ? result.pageComponent.renderer : result;

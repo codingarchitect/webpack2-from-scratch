@@ -18,6 +18,8 @@ export const componentMetadata = {
   active: true,
   childComponentIds: [],
   renderer: page3,
+  extensible: true,
+  layout: 'Tab',
 };
 
 const pageCreationParams = {
@@ -26,7 +28,6 @@ const pageCreationParams = {
     key: 'page3',
     reducer: page3Reducer,
   },
-  layout: 'Tab',
   contexts: {
     component: require.context('./Components/', true, /component.js/),
     link: require.context('./Component-Links/', true, /link.js/),

@@ -8,6 +8,8 @@ export const componentMetadata = {
   active: true,
   childComponentIds: [],
   renderer: page2Component2,
+  extensible: true,
+  layout: 'Panel',
 };
 
 export default componentMetadata;
