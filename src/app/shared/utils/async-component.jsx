@@ -1,6 +1,7 @@
 import React from 'react';
+import createPageComponent from '../mag-component/component-factory';
 
-export default (loader, collection) => (
+export default (loader, collection, store) => (
   class AsyncComponent extends React.Component {
     constructor(props) {
       super(props);
@@ -11,9 +12,14 @@ export default (loader, collection) => (
 
     componentWillMount() {
       if (!this.state.Component) {
-        loader().then((Component) => {
+        loader().then((moduleResult) => {
+          const result = moduleResult.default ? moduleResult.default : moduleResult;
+          const Component = result.pageComponent ? result.pageComponent.renderer : result;
+          if (result.pageComponent) {
+            result.store = store;
+            createPageComponent(result);
+          }
           AsyncComponent.Component = Component;
-
           this.setState({ Component });
         });
       }

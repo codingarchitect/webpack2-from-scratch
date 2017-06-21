@@ -6,10 +6,10 @@ import asyncComponent from 'shared/utils/async-component';
 
 function getPageLoaders(store) {
   return {
-    home: asyncComponent(() => import('./pages/Home/Home').then(module => module.default), { name: 'Home' }),
-    page1: asyncComponent(() => import('./pages/Page1/Page1').then(module => module.default(store)), { name: 'Page1' }),
-    page2: asyncComponent(() => import('./pages/Page2/Page2').then(module => module.default(store)), { name: 'Page2' }),
-    page3: asyncComponent(() => import('./pages/Page3/Page3').then(module => module.default(store)), { name: 'Page3' }),
+    home: asyncComponent(() => import('./pages/Home/Home'), { name: 'Home' }),
+    page1: asyncComponent(() => import('./pages/Page1/Page1'), { name: 'Page1' }, store),
+    page2: asyncComponent(() => import('./pages/Page2/Page2'), { name: 'Page2' }, store),
+    page3: asyncComponent(() => import('./pages/Page3/Page3'), { name: 'Page3' }, store),
   };
 }
 
@@ -31,4 +31,3 @@ export default function AppFactory(store) {
   </div>);
   return render;
 }
-

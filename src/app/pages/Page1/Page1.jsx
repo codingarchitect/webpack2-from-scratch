@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
-import createComponent from 'shared/mag-component/component-factory';
 import extensibleComponent from 'shared/mag-component/extensible-component';
 import page1Reducer from './page1.reducer';
 
@@ -37,7 +36,4 @@ const pageCreationParams = {
     link: require.context('./Component-Links/', true, /link.js/),
   },
 };
-export default (store) => {
-  pageCreationParams.store = store;
-  return createComponent(pageCreationParams);
-};
+export default pageCreationParams;
