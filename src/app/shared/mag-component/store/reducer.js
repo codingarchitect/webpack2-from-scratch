@@ -7,7 +7,7 @@ function componentExists(state, id) {
 
 const childComponentIds = (state, action) => {
   const childComponentId = state.find(componentId => componentId === action.payload.childId);
-  if (childComponentId) return state;
+  if (childComponentId && action.type === Actions.REGISTER_AS_CHILD_COMPONENT) return state;
   switch (action.type) {
     case Actions.REGISTER_AS_CHILD_COMPONENT:
       return [...state, action.payload.childId];
@@ -18,14 +18,43 @@ const childComponentIds = (state, action) => {
   }
 };
 
+function handleChildComponentSequenceRegistrationFlows(state, action, childComponentId) {
+  let newState;
+  switch (action.type) {
+    case Actions.REGISTER_AS_CHILD_COMPONENT:
+      debugger; // eslint-disable-line
+      newState = { ...state };
+      newState[childComponentId] = action.payload.sequece || Math.max(Object.values(state)) + 1;
+      return newState;
+    case Actions.DEACTIVATE_CHILD_COMPONENT:
+      newState = { ...state };
+      delete newState[childComponentId];
+      return newState;
+    default:
+      return state;
+  }
+}
+
+const childComponentIdSequences = (state, action) => {
+  const childComponentId = state[action.payload.childId];
+  if (childComponentId && action.type === Actions.REGISTER_AS_CHILD_COMPONENT) return state;
+  if (!childComponentId && action.type === Actions.DEACTIVATE_CHILD_COMPONENT) return state;
+  return handleChildComponentSequenceRegistrationFlows(state, action, action.payload.childId);
+};
+
+function registerComponentHandler(action) {
+  return {
+    ...action.payload,
+    active: true,
+    childComponentIds: action.payload.childComponentIds || [],
+    childComponentIdSequences: action.payload.childComponentIdSequences || {},
+  };
+}
+
 const component = (state, action) => {
   switch (action.type) {
     case Actions.REGISTER_COMPONENT:
-      return {
-        ...action.payload,
-        active: true,
-        childComponentIds: action.payload.childComponentIds || [],
-      };
+      return registerComponentHandler(action);
     case Actions.DEACTIVATE_COMPONENT:
       return {
         ...action.payload,
@@ -36,6 +65,8 @@ const component = (state, action) => {
       return {
         ...state,
         childComponentIds: childComponentIds(state.childComponentIds, action),
+        childComponentIdSequences:
+          childComponentIdSequences(state.childComponentIdSequences, action),
       };
     default:
       return state;
