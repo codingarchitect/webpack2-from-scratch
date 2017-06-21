@@ -1,4 +1,4 @@
-import { registerComponent, registerAsChildComponent } from './store';
+import { registerComponent, registerAsChildComponent } from './store/actions';
 import extensibleComponent from './extensible-component';
 
 const requireAll = context => context.keys().map(context);

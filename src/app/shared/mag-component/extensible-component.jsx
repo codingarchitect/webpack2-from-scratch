@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DefaultLayoutComponentRenderer from './default-layout-component-renderer';
-import FormLayoutComponentRenderer from './form-layout-component-renderer';
-import PanelLayoutComponentRenderer from './panel-layout-component-renderer';
-import TabLayoutComponentRenderer from './tab-layout-component-renderer';
+import DefaultLayoutComponentRenderer from './layouts/default-layout-component-renderer';
+import FormLayoutComponentRenderer from './layouts/form-layout-component-renderer';
+import PanelLayoutComponentRenderer from './layouts/panel-layout-component-renderer';
+import TabLayoutComponentRenderer from './layouts/tab-layout-component-renderer';
 
 const mapStateToProps = (state) => {
   if (!state) return ({ componentState: {} });

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-bootstrap';
-import { registerComponent, registerAsChildComponent } from './store';
+import { registerComponent, registerAsChildComponent } from '../store/actions';
 
 function registerComponents(
   dispatch, componentId, componentsInThisTemplate, componentLinks, renderer) {

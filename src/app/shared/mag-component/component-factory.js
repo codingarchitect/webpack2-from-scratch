@@ -1,6 +1,6 @@
 import { injectReducer } from '../store/reducer';
 import dynamicLoader from './component-loader';
-import { registerComponent } from './store';
+import { registerComponent } from './store/actions';
 
 export default function createPageComponent(pageCreationParams) {
   const store = pageCreationParams.store;

@@ -11,7 +11,7 @@ import './assets/stylesheets/styles.less'; // This line cost me 2-3 hours of deb
 import AppFactory from './app/App';
 import createStore from './app/shared/store/create-store';
 import { injectReducer } from './app/shared/store/reducer';
-import componentReducer from './app/shared/mag-component/store';
+import componentReducer from './app/shared/mag-component/store/reducer';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
