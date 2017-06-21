@@ -8,8 +8,10 @@ import { createBrowserHistory } from 'history';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import './assets/stylesheets/styles.less'; // This line cost me 2-3 hours of debugging. Without this the styles.css is not emitted by etract text web pack plugin
-import App from './app/App';
+import AppFactory from './app/App';
 import createStore from './app/shared/store/create-store';
+import { injectReducer } from './app/shared/store/reducer';
+import componentReducer from './app/shared/mag-component/store';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -23,11 +25,14 @@ const store = createStore(initialState);
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(createBrowserHistory(), store);
+
+// Setup components reducer
+injectReducer(store, { key: 'components', reducer: componentReducer });
 // ========================================================
 // Render Setup
 // ========================================================
 const MOUNT_NODE = document.getElementById('root');
-
+const App = AppFactory(store);
 let render = () =>
   ReactDOM.render(
     (<Provider store={store}>

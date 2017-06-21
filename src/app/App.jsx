@@ -1,15 +1,10 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
-import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import asyncComponent from 'shared/utils/async-component';
-import componentReducer from 'shared/mag-component/store';
-import { injectReducer } from 'shared/store/reducer';
 
-const App = (props, context) => {
-  const store = context.store;
-  injectReducer(store, { key: 'components', reducer: componentReducer });
+export default function AppFactory(store) {
   const HomePage = asyncComponent(() => import(/* webpackChunkName: "Home" */ './pages/Home/Home')
     .then(module => module.default), { name: 'Home' });
   const Page1 = asyncComponent(() => import(/* webpackChunkName: "Page1" */ './pages/Page1/Page1')
@@ -18,7 +13,7 @@ const App = (props, context) => {
     .then(module => module.default(store)), { name: 'Page2' });
   const Page3 = asyncComponent(() => import(/* webpackChunkName: "Page3" */ './pages/Page3/Page3')
     .then(module => module.default(store)), { name: 'Page3' });
-  return (<div>
+  const render = () => (<div>
     <Helmet
       titleTemplate="Maginus OMS - %s"
       titleAttributes={{ itemprop: 'name', lang: 'en' }}
@@ -32,10 +27,5 @@ const App = (props, context) => {
       </Switch>
     </MuiThemeProvider>
   </div>);
-};
-
-App.contextTypes = {
-  store: PropTypes.object,
-};
-
-export default App;
+  return render;
+}
