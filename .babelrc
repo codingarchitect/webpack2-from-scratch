@@ -4,5 +4,10 @@
     "react",
     "stage-2"
   ],
-  "plugins": ["dynamic-import-webpack"]
+  "plugins": ["dynamic-import-webpack"],
+  "env": {
+    "test": {
+      "plugins": ["transform-es2015-modules-commonjs", "dynamic-import-node"]
+    }
+  }
 }
