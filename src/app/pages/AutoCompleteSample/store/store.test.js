@@ -1,15 +1,25 @@
-import {mockTimeSource} from '@cycle/time';
+import { mockTimeSource } from '@cycle/time/rxjs';
+import Rx from 'rxjs';
 
-describe('@cycle/time delay', () => {
-  it('is super quick because of virtual time', (done) => {
+function main(sources) {
+  const pong$ = sources.ACTION
+    .filter(action => action.type === 'PING')
+    .map(() => { return { type: 'PONG'} });
+
+  return {
+    ACTION: pong$
+  }
+}
+
+describe('redux-cycles', () => {
+  it('ping should be mapped to pong', (done) => {
     const Time = mockTimeSource();
-
-    const input$    = Time.diagram('-1--------2---|');
-    const actual$   = input$.compose(Time.delay(200));
-    const expected$ = Time.diagram('-----------1--------2---|');
+    
+    const input$    = { ACTION: Time.diagram('-p--------p---|', { p: { type: 'PING'}})};
+    const actual$   = main(input$).ACTION;
+    const expected$    = Time.diagram('-p--------p---|', { p: { type: 'PONG'}});
 
     Time.assertEqual(actual$, expected$);
-
     Time.run(done);
   });
 });
