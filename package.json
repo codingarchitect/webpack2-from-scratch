@@ -7,7 +7,9 @@
     "test": "eslint app/src && jest --coverage",
     "start": "webpack --progress && webpack-dev-server -d --progress --colors --hot --config webpack.config.js --watch",
     "production": "SET NODE_ENV=production & webpack -p",
-    "build": "SET NODE_ENV=production & webpack -p"
+    "build": "SET NODE_ENV=production & webpack -p",
+    "precommit": "npm run test",
+    "prepush": "npm run test"
   },
   "keywords": [],
   "author": "",
@@ -35,6 +37,7 @@
     "eslint-plugin-react": "^7.1.0",
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
+    "husky": "^0.14.2",
     "image-webpack-loader": "^3.3.1",
     "jest": "^20.0.4",
     "less": "^2.7.2",
