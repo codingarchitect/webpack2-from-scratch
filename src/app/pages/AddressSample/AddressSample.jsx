@@ -3,6 +3,8 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import Form from 'react-jsonschema-form';
 
+import Lookup from './Lookup';
+
 const schema = {
   definitions: {
     address: {
@@ -31,6 +33,10 @@ const schema = {
         address6: {
           type: 'string',
           title: 'Address6',
+        },
+        postcode: {
+          type: 'string',
+          title: 'Postcode',
         },
       },
       required: [
@@ -62,6 +68,19 @@ const schema = {
   },
 };
 
+// Define the custom field component to use for the root object
+const uiSchema = {
+  billing_address: {
+    postcode: {
+      'ui:widget': 'lookup',
+    },
+  },
+};
+
+// Define the custom field components to register; here our "geo"
+// custom field component
+const widgets = { lookup: Lookup };
+
 const log = type => console.log.bind(console, type);
 
 const addressSample = () =>
@@ -69,6 +88,8 @@ const addressSample = () =>
     <Helmet title="Address Sample" />
     <Form
       schema={schema}
+      uiSchema={uiSchema}
+      widgets={widgets}
       onChange={log('changed')}
       onSubmit={log('submitted')}
       onError={log('errors')}
