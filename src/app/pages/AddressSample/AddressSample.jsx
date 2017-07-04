@@ -38,6 +38,12 @@ const schema = {
           type: 'string',
           title: 'Postcode',
         },
+        country: {
+          type: 'string',
+          title: 'Country',
+          enum: ['UK', 'US', 'IN'],
+          enumNames: ['United Kingdom', 'United States', 'India'],
+        },
       },
       required: [
         'address1',
