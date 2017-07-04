@@ -66,7 +66,9 @@ const addressSample = () =>
       onChange={log('changed')}
       onSubmit={log('submitted')}
       onError={log('errors')}
-    />
+    >
+      <span />
+    </Form>
   </div>);
 
 export default addressSample;
