@@ -4,12 +4,55 @@ import Helmet from 'react-helmet';
 import Form from 'react-jsonschema-form';
 
 const schema = {
-  title: 'Todo',
+  definitions: {
+    address: {
+      type: 'object',
+      properties: {
+        address1: {
+          type: 'string',
+        },
+        address2: {
+          type: 'string',
+        },
+        address3: {
+          type: 'string',
+        },
+        address4: {
+          type: 'string',
+        },
+        address5: {
+          type: 'string',
+        },
+        address6: {
+          type: 'string',
+        },
+      },
+      required: [
+        'address1',
+        'address2',
+      ],
+    },
+    node: {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+        },
+        children: {
+          type: 'array',
+          items: {
+            $ref: '#/definitions/node',
+          },
+        },
+      },
+    },
+  },
   type: 'object',
-  required: ['title'],
   properties: {
-    title: { type: 'string', title: 'Title', default: 'A new task' },
-    done: { type: 'boolean', title: 'Done?', default: false },
+    billing_address: {
+      title: 'Delivery address',
+      $ref: '#/definitions/address',
+    },
   },
 };
 
