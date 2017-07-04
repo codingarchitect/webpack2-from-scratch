@@ -67,7 +67,7 @@ const schema = {
   },
   type: 'object',
   properties: {
-    billing_address: {
+    delivery_address: {
       title: 'Delivery address',
       $ref: '#/definitions/address',
     },
@@ -76,7 +76,7 @@ const schema = {
 
 // Define the custom field component to use for the root object
 const uiSchema = {
-  billing_address: {
+  delivery_address: {
     postcode: {
       'ui:widget': 'lookup',
     },
@@ -93,6 +93,7 @@ const addressSample = () =>
   (<div>
     <Helmet title="Address Sample" />
     <Form
+      noHtml5Validate
       schema={schema}
       uiSchema={uiSchema}
       widgets={widgets}
