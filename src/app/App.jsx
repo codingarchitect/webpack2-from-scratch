@@ -10,6 +10,7 @@ function getPageLoaders(store) {
     page1: asyncComponent(() => import('./pages/Page1/Page1'), { name: 'Page1' }, store),
     page2: asyncComponent(() => import('./pages/Page2/Page2'), { name: 'Page2' }, store),
     page3: asyncComponent(() => import('./pages/Page3/Page3'), { name: 'Page3' }, store),
+    addressSample: asyncComponent(() => import('./pages/AddressSample/AddressSample'), { name: 'AddressSample' }, store),
   };
 }
 
@@ -26,6 +27,7 @@ export default function AppFactory(store) {
         <Route path="/page1" component={pageLoaders.page1} />
         <Route path="/page2" component={pageLoaders.page2} />
         <Route path="/page3" component={pageLoaders.page3} />
+        <Route path="/address-sample" component={pageLoaders.addressSample} />
       </Switch>
     </MuiThemeProvider>
   </div>);
