@@ -22,7 +22,7 @@ const validatePostcode = (country, postcode, dispatch, forModel) => {
   return true;
 };
 
-const CountryPostCode = ({ forModel, dispatch, intl }) => {
+const CountryPostCode = ({ forModel, dispatch, intl, mode }) => {
   const { formatMessage } = intl;
   return (<Form
     model={`${forModel}`}
@@ -37,7 +37,7 @@ const CountryPostCode = ({ forModel, dispatch, intl }) => {
   >
     <span className="form-group">
       <label className="control-label" htmlFor="address.postcode">Postcode:</label>
-      <Control.select className="form-control" model=".country" id="address.country" >
+      <Control.select className="form-control" model=".country" id="address.country" readOnly={mode === 'readOnly'} >
         <option value="IN">India</option>
         <option value="UK">United Kingdom</option>
         <option value="US">United States</option>
@@ -50,6 +50,7 @@ const CountryPostCode = ({ forModel, dispatch, intl }) => {
         model=".postcode"
         id="address.postcode"
         debounce={300}
+        readOnly={mode === 'readOnly'}
       />
     </span>
     <Errors
@@ -66,6 +67,11 @@ CountryPostCode.propTypes = {
   forModel: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired, // eslint-disable-line
+  mode: PropTypes.string.isRequired,
+};
+
+CountryPostCode.defaultProps = {
+  mode: 'edit',
 };
 
 export default connect(null)(injectIntl(CountryPostCode));

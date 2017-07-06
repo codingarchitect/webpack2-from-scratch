@@ -7,7 +7,7 @@ import addressSchema from './address-schema';
 
 import './address.less';
 
-const renderLines = () => {
+const renderLines = (mode) => {
   const properties = addressSchema.properties;
   const requiredLines = addressSchema.required;
   return (
@@ -25,6 +25,7 @@ const renderLines = () => {
             validators={{
               required: lineVal => (isRequired ? lineVal && lineVal.length : true),
             }}
+            readOnly={mode === 'readOnly'}
           />
           <Errors
             model={`.${line}`}
@@ -39,10 +40,10 @@ const renderLines = () => {
   );
 };
 
-const makeAddress = forModel =>
+const makeAddress = (forModel, mode) =>
   (<Form model={forModel} className="form-inline">
-    { renderLines() }
-    <CountryPostCode forModel={forModel} />
+    { renderLines(mode) }
+    <CountryPostCode forModel={forModel} mode={mode} />
   </Form>);
 
 export default makeAddress;

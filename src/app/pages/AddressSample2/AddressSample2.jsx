@@ -12,7 +12,8 @@ const addressSample2 = () =>
     <h1>Address Sample (react-redux-form)</h1>
     <Link to="/">Home</Link>
     { makeAddress('addressSample2.deliveryAddress') }
-    { makeAddress('addressSample2.invoiceAddress') }
+    { makeAddress('addressSample2.invoiceAddress', 'readOnly') }
+    { makeAddress('addressSample2.billingAddress') }
   </div>);
 
 export const componentMetadata = {
