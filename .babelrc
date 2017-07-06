@@ -4,10 +4,21 @@
     "react",
     "stage-2"
   ],
-  "plugins": ["dynamic-import-webpack"],
+  "plugins": [
+    "dynamic-import-webpack",
+    [
+      "react-intl", {
+        "messagesDir": "./public/messages",
+        "enforceDescriptions": false
+      }
+    ]
+  ],
   "env": {
     "test": {
-      "plugins": ["transform-es2015-modules-commonjs", "dynamic-import-node"]
+      "plugins": [
+        "transform-es2015-modules-commonjs",         
+        "dynamic-import-node"        
+      ]
     }
   }
 }

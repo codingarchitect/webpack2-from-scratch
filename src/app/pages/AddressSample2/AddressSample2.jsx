@@ -3,8 +3,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Control, Fieldset, Form } from 'react-redux-form';
 import Helmet from 'react-helmet';
-import CountryPostCode from './CountryPostcode';
 
+import CountryPostCode from './CountryPostcode';
 import addressSample2Reducer from './address-sample2.reducer';
 
 const addressSample2 = () =>

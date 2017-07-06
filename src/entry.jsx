@@ -6,12 +6,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { IntlProvider } from 'react-intl';
 
 import './assets/stylesheets/styles.less'; // This line cost me 2-3 hours of debugging. Without this the styles.css is not emitted by etract text web pack plugin
 import AppFactory from './app/App';
 import createStore from './app/shared/store/create-store';
 import { injectReducer } from './app/shared/store/reducer';
 import componentReducer from './app/shared/mag-component/store/reducer';
+import reactIntl from './utils/intl';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -35,11 +37,13 @@ const MOUNT_NODE = document.getElementById('root');
 const App = AppFactory(store);
 let render = () =>
   ReactDOM.render(
-    (<Provider store={store}>
-      <BrowserRouter history={history}>
-        <App />
-      </BrowserRouter>
-    </Provider>),
+    (<IntlProvider locale={reactIntl.language} messages={reactIntl.messages}>
+      <Provider store={store}>
+        <BrowserRouter history={history}>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </IntlProvider>),
     MOUNT_NODE);
 
 // This code is excluded from production bundle
