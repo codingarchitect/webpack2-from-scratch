@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import { Form, Control } from 'react-redux-form';
+import { Form, Control, Errors } from 'react-redux-form';
 
 const validatePostcode = (country, postcode) => {
   console.log('validating');
@@ -18,13 +18,21 @@ const validatePostcode = (country, postcode) => {
   return true;
 };
 
+const reduxFormValidators = {
+  '': {
+    invalidPostcodeFormat: ({ country, postcode }) => validatePostcode(country, postcode),
+  },
+};
+
+const reduxFormErrors = {
+  invalidPostcodeFormat: 'Invalid postcode format.',
+};
+
 const CountryPostCode = ({ forModel }) => (
   <Form
     model={`${forModel}`}
     component="span"
-    validators={{
-      '': ({ country, postcode }) => validatePostcode(country, postcode),
-    }}
+    validators={reduxFormValidators}
   >
     <Control.select model=".country" id="address.country" >
       <option value="IN">India</option>
@@ -33,6 +41,10 @@ const CountryPostCode = ({ forModel }) => (
     </Control.select>
     <label htmlFor="address.postcode">Postcode:</label>
     <Control.text model=".postcode" id="address.postcode" debounce={300} />
+    <Errors
+      model={`${forModel}`}
+      messages={reduxFormErrors}
+    />
   </Form>
 );
 
