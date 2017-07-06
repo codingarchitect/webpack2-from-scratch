@@ -1,3 +1,3 @@
-export const DebounceTimeForFormFieldChange = 300;
+export const DebounceTimeForFormFieldChange = 500;
 
 export default {};

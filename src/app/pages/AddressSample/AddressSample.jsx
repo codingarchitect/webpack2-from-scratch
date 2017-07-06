@@ -4,79 +4,13 @@ import Helmet from 'react-helmet';
 import Form from 'react-jsonschema-form';
 
 import Lookup from './Lookup';
+import schema from './address-schema';
 
-const schema = {
-  definitions: {
-    address: {
-      type: 'object',
-      properties: {
-        address1: {
-          type: 'string',
-          title: 'Address1',
-        },
-        address2: {
-          type: 'string',
-          title: 'Address2',
-        },
-        address3: {
-          type: 'string',
-          title: 'Address3',
-        },
-        address4: {
-          type: 'string',
-          title: 'Address4',
-        },
-        address5: {
-          type: 'string',
-          title: 'Address5',
-        },
-        address6: {
-          type: 'string',
-          title: 'Address6',
-        },
-        postcode: {
-          type: 'string',
-          title: 'Postcode',
-        },
-        country: {
-          type: 'string',
-          title: 'Country',
-          enum: ['UK', 'US', 'IN'],
-          enumNames: ['United Kingdom', 'United States', 'India'],
-        },
-      },
-      required: [
-        'address1',
-        'address2',
-      ],
-    },
-    node: {
-      type: 'object',
-      properties: {
-        name: {
-          type: 'string',
-        },
-        children: {
-          type: 'array',
-          items: {
-            $ref: '#/definitions/node',
-          },
-        },
-      },
-    },
-  },
-  type: 'object',
-  properties: {
-    delivery_address: {
-      title: 'Delivery address',
-      $ref: '#/definitions/address',
-    },
-  },
-};
+console.log(schema);
 
 // Define the custom field component to use for the root object
 const uiSchema = {
-  delivery_address: {
+  address: {
     postcode: {
       'ui:widget': 'lookup',
     },
@@ -89,17 +23,45 @@ const widgets = { lookup: Lookup };
 
 const log = type => console.log.bind(console, type);
 
+var data = { // eslint-disable-line
+  address: {
+    country: 'UK',
+    address2: 'Line2',
+  },
+};
+
+const validate = (formData, errors) => {
+  var address = formData.address; // eslint-disable-line
+  const postcode = address.postcode;
+  if (address.country === 'UK' && postcode) {
+    const ukPostcodeFormat = /^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/;
+    // TODO: read this message using an I18n library
+    if (!ukPostcodeFormat.test(postcode)) {
+      errors.address.postcode.addError('Invalid postcode format.');
+    } else {
+      const parts = postcode.toUpperCase().match(/^([A-Z]{1,2}\d{1,2}[A-Z]?)\s*(\d[A-Z]{2})$/);
+      parts.shift();
+      const normalizedPostcode = parts.join(' ');
+      data.address.postcode = normalizedPostcode;
+      data.address.address1 = normalizedPostcode;
+    }
+  }
+  return errors;
+};
+
 const addressSample = () =>
   (<div>
     <Helmet title="Address Sample" />
     <Form
       noHtml5Validate
       schema={schema}
+      formData={data}
       uiSchema={uiSchema}
       widgets={widgets}
       onChange={log('changed')}
       onSubmit={log('submitted')}
       onError={log('errors')}
+      validate={validate}
     >
       <span />
     </Form>
