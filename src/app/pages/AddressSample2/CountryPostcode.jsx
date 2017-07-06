@@ -30,23 +30,34 @@ const CountryPostCode = ({ forModel, dispatch, intl }) => {
     validators={{
       '': {
         invalidPostcodeFormat:
-          ({ country, postcode }) =>
-            validatePostcode(country, postcode, dispatch, forModel),
+            ({ country, postcode }) =>
+              validatePostcode(country, postcode, dispatch, forModel),
       },
     }}
   >
-    <Control.select model=".country" id="address.country" >
-      <option value="IN">India</option>
-      <option value="UK">United Kingdom</option>
-      <option value="US">United States</option>
-    </Control.select>
-    <label htmlFor="address.postcode">Postcode:</label>
-    <Control.text model=".postcode" id="address.postcode" debounce={300} />
+    <span className="form-group">
+      <label className="control-label" htmlFor="address.postcode">Postcode:</label>
+      <Control.select className="form-control" model=".country" id="address.country" >
+        <option value="IN">India</option>
+        <option value="UK">United Kingdom</option>
+        <option value="US">United States</option>
+      </Control.select>
+    </span>
+    <span className="form-group">
+      <label className="control-label" htmlFor="address.postcode">Postcode:</label>
+      <Control.text
+        className="form-control"
+        model=".postcode"
+        id="address.postcode"
+        debounce={300}
+      />
+    </span>
     <Errors
       model={`${forModel}`}
       messages={{
         invalidPostcodeFormat: formatMessage(messages.invalidPostcodeFormat),
       }}
+      wrapper="span"
     />
   </Form>);
 };

@@ -8,6 +8,8 @@ import CountryPostCode from './CountryPostcode';
 import addressSample2Reducer from './address-sample2.reducer';
 import addressSchema from './address-schema';
 
+import './address.less';
+
 const renderLines = () => {
   const properties = addressSchema.properties;
   const requiredLines = addressSchema.required;
@@ -15,11 +17,14 @@ const renderLines = () => {
     Object.keys(properties).map((line) => {
       const isRequired = requiredLines.includes(line);
       return (
-        <span key={line}>
-          <label htmlFor={`address.${line}`}>{properties[line].title}{isRequired && '*'}</label>
+        <span className="form-group" key={line}>
+          <label className="control-label" htmlFor={`address.${line}`}>
+            {properties[line].title}{isRequired && '*'}
+          </label>
           <Control.text
             model={`.${line}`}
             id={`address.${line}`}
+            className="form-control"
             validators={{
               required: lineVal => (isRequired ? lineVal && lineVal.length : true),
             }}
@@ -43,7 +48,7 @@ const addressSample2 = () =>
     <h1>Address Sample (react-redux-form)</h1>
     <Link to="/">Home</Link>
     <Form model="addressSample2">
-      <Fieldset model=".address">
+      <Fieldset model=".address" className="form-inline">
         { renderLines() }
         <CountryPostCode forModel="addressSample2.address" />
       </Fieldset>
