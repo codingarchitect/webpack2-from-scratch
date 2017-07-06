@@ -1,10 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
-import { Form, Control, Errors } from 'react-redux-form';
+import { Form, Control, Errors, actions } from 'react-redux-form';
 
-const validatePostcode = (country, postcode) => {
-  console.log('validating');
+const validatePostcode = (country, postcode, dispatch, forModel) => {
   if (country !== 'UK') return true;
   const ukPostcodeFormat = /^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/;
   // TODO: read this message using an I18n library
@@ -14,25 +14,27 @@ const validatePostcode = (country, postcode) => {
   const parts = postcode.toUpperCase().match(/^([A-Z]{1,2}\d{1,2}[A-Z]?)\s*(\d[A-Z]{2})$/);
   parts.shift();
   const normalizedPostcode = parts.join(' ');
-  console.log(normalizedPostcode);
+  if (postcode !== normalizedPostcode) {
+    dispatch(actions.change(`${forModel}.postcode`, normalizedPostcode));
+  }
   return true;
-};
-
-const reduxFormValidators = {
-  '': {
-    invalidPostcodeFormat: ({ country, postcode }) => validatePostcode(country, postcode),
-  },
 };
 
 const reduxFormErrors = {
   invalidPostcodeFormat: 'Invalid postcode format.',
 };
 
-const CountryPostCode = ({ forModel }) => (
+const CountryPostCode = ({ forModel, dispatch }) => (
   <Form
     model={`${forModel}`}
     component="span"
-    validators={reduxFormValidators}
+    validators={{
+      '': {
+        invalidPostcodeFormat:
+          ({ country, postcode }) =>
+            validatePostcode(country, postcode, dispatch, forModel),
+      },
+    }}
   >
     <Control.select model=".country" id="address.country" >
       <option value="IN">India</option>
@@ -50,6 +52,7 @@ const CountryPostCode = ({ forModel }) => (
 
 CountryPostCode.propTypes = {
   forModel: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default CountryPostCode;
+export default connect(null)(CountryPostCode);
