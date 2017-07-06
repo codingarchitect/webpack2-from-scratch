@@ -1,11 +1,41 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import { Control, Fieldset, Form } from 'react-redux-form';
+import { Control, Errors, Fieldset, Form } from 'react-redux-form';
 import Helmet from 'react-helmet';
 
 import CountryPostCode from './CountryPostcode';
 import addressSample2Reducer from './address-sample2.reducer';
+import addressSchema from './address-schema';
+
+const renderLines = () => {
+  const properties = addressSchema.properties;
+  const requiredLines = addressSchema.required;
+  return (
+    Object.keys(properties).map((line) => {
+      const isRequired = requiredLines.includes(line);
+      return (
+        <span key={line}>
+          <label htmlFor={`address.${line}`}>{properties[line].title}{isRequired && '*'}</label>
+          <Control.text
+            model={`.${line}`}
+            id={`address.${line}`}
+            validators={{
+              required: lineVal => (isRequired ? lineVal && lineVal.length : true),
+            }}
+          />
+          <Errors
+            model={`.${line}`}
+            wrapper="span"
+            messages={{
+              required: () => '*',
+            }}
+          />
+        </span>
+      );
+    })
+  );
+};
 
 const addressSample2 = () =>
   (<div>
@@ -14,11 +44,7 @@ const addressSample2 = () =>
     <Link to="/">Home</Link>
     <Form model="addressSample2">
       <Fieldset model=".address">
-        <label htmlFor="address.address1">Address1:</label>
-        <Control.text model=".address1" id="address.address1" />
-        <label htmlFor="address.address2">Address2:</label>
-        <Control.text model=".address2" id="address.address2" />
-        <label htmlFor="address.country">Country:</label>
+        { renderLines() }
         <CountryPostCode forModel="addressSample2.address" />
       </Fieldset>
     </Form>

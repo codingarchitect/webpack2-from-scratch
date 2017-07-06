@@ -2,5 +2,9 @@
   {
     "id": "Address.invalidPostcodeFormat",
     "defaultMessage": "Invalid postcode format."
+  },
+  {
+    "id": "Address.fieldIsRequired",
+    "defaultMessage": "{fieldName} is required."
   }
 ]

@@ -5,6 +5,10 @@ const messages = defineMessages({
     id: 'Address.invalidPostcodeFormat',
     defaultMessage: 'Invalid postcode format.',
   },
+  fieldIsRequired: {
+    id: 'Address.fieldIsRequired',
+    defaultMessage: '{fieldName} is required.',
+  },
 });
 
 export default messages;
