@@ -1,9 +1,10 @@
 import { combineForms } from 'react-redux-form';
 
 const initialAddressState = {
-  address1: 'Line1',
-  address2: 'Line2',
-  postcode: 'UK',
+  address1: '',
+  address2: '',
+  country: 'UK',
+  postcode: '',
 };
 
 const reducer = combineForms({
