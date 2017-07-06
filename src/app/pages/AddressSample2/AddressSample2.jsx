@@ -24,7 +24,7 @@ const addressSample2 = () =>
           <option value="US">United States</option>
         </Control.select>
         <label htmlFor="address.postcode">Postcode:</label>
-        <Control.text model=".postcode" id="address.postcode" />
+        <Control.text model=".postcode" id="address.postcode" debounce={300} />
       </Fieldset>
     </Form>
   </div>);
