@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Control, Fieldset, Form } from 'react-redux-form';
 import Helmet from 'react-helmet';
+import CountryPostCode from './CountryPostcode';
 
 import addressSample2Reducer from './address-sample2.reducer';
 
@@ -18,13 +19,7 @@ const addressSample2 = () =>
         <label htmlFor="address.address2">Address2:</label>
         <Control.text model=".address2" id="address.address2" />
         <label htmlFor="address.country">Country:</label>
-        <Control.select model=".country" id="address.country" >
-          <option value="IN">India</option>
-          <option value="UK">United Kingdom</option>
-          <option value="US">United States</option>
-        </Control.select>
-        <label htmlFor="address.postcode">Postcode:</label>
-        <Control.text model=".postcode" id="address.postcode" debounce={300} />
+        <CountryPostCode forModel="addressSample2.address" />
       </Fieldset>
     </Form>
   </div>);

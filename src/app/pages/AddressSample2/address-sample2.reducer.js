@@ -9,6 +9,6 @@ const initialAddressState = {
 
 const reducer = combineForms({
   address: initialAddressState,
-});
+}, 'addressSample2');
 
 export default reducer;
