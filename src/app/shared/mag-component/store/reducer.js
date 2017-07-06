@@ -22,7 +22,6 @@ function handleChildComponentSequenceRegistrationFlows(state, action, childCompo
   let newState;
   switch (action.type) {
     case Actions.REGISTER_AS_CHILD_COMPONENT:
-      debugger; // eslint-disable-line
       newState = { ...state };
       newState[childComponentId] = action.payload.sequece || Math.max(Object.values(state)) + 1;
       return newState;

@@ -19,6 +19,9 @@ const home = () =>
       <li>
         <Link to="address-sample">Address Sample</Link>
       </li>
+      <li>
+        <Link to="address-sample2">Address Sample (react-redux-form)</Link>
+      </li>
     </ul>
   </div>);
 
