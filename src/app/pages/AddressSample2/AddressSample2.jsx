@@ -4,16 +4,17 @@ import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 
 import addressSample2Reducer from './address-sample2.reducer';
-import makeAddress from './Address';
+import Address from './Address';
 
 const addressSample2 = () =>
   (<div>
     <Helmet title="Address Sample (Using react-redux-form)" />
     <h1>Address Sample (react-redux-form)</h1>
     <Link to="/">Home</Link>
-    { makeAddress('addressSample2.deliveryAddress') }
-    { makeAddress('addressSample2.invoiceAddress', 'readOnly') }
-    { makeAddress('addressSample2.billingAddress') }
+    <Address forModel="addressSample2.deliveryAddress" />
+    <Address forModel="addressSample2.invoiceAddress" mode="readOnly" />
+    <Address forModel="addressSample2.billingAddress" />
+    <Address forModel="addressSample2.deliveryAddress" mode="singleLine" />
   </div>);
 
 export const componentMetadata = {

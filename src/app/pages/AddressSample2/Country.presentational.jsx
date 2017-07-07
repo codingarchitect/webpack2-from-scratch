@@ -5,7 +5,11 @@ const CountryPresentational = props =>
   (<span className="form-group">
     <label className="control-label" htmlFor={props.name}>Country:</label>
     <select className="form-control" id={props.name} {...props} readOnly={props.mode === 'readOnly'} >
-      {props.countries.map(country => <option value={country.CountryCode}>{country.Name}</option>) }
+      {
+        props.countries.map(
+          country =>
+            <option value={country.CountryCode} key={country.CountryCode}>{country.Name}</option>)
+      }
     </select>
   </span>);
 

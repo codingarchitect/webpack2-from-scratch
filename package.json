@@ -17,7 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^7.1.1",
-    "babel-cli": "^6.24.1",    
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
@@ -58,6 +58,7 @@
   "dependencies": {
     "@cycle/time": "^0.8.0",
     "history": "^4.6.2",
+    "lodash": "^4.17.4",
     "material-ui": "^0.18.3",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
