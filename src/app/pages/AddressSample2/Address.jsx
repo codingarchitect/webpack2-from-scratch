@@ -22,41 +22,43 @@ const makeErrorsComponent = model =>
       }}
     />);
 
-const renderLines = (mode) => {
+const renderLines = (mode, address) => {
   const properties = addressSchema.properties;
   const requiredLines = addressSchema.required;
   return (
-    Object.keys(properties).map((line) => {
-      const isRequired = requiredLines.includes(line);
-      return (
-        <Control.text
-          model={`.${line}`}
-          validators={{
-            required: lineVal => (isRequired ? lineVal && lineVal.length : true),
-          }}
-          mode={mode}
-          label={properties[line].title}
-          component={LinePresentational}
-          required={isRequired}
-          errorsComponent={makeErrorsComponent(line)}
-          key={line}
-        />
-      );
-    })
+    Object.keys(properties)
+      .filter((line) => { if (mode === 'readOnly') return address[line]; return true; })
+      .map((line) => {
+        const isRequired = requiredLines.includes(line);
+        return (
+          <Control.text
+            model={`.${line}`}
+            validators={{
+              required: lineVal => (isRequired ? lineVal && lineVal.length : true),
+            }}
+            mode={mode}
+            label={properties[line].title}
+            component={LinePresentational}
+            required={isRequired}
+            errorsComponent={makeErrorsComponent(line)}
+            key={line}
+          />
+        );
+      })
   );
 };
 
 const zipLines = address => [address.address1, address.address2, address.address3, address.address4,
-  address.address5, address.address6, address.country, address.postcode].filter(line => line).join(',');
+  address.address5, address.address6, address.postcode, address.country].filter(line => line).join(', ');
 
 const Address = ({ forModel, mode, state }) => {
+  const address = _.get(state, forModel);
   if (mode !== 'singleLine') {
     return (<Form model={forModel} className="form-inline">
-      { renderLines(mode) }
+      { renderLines(mode, address) }
       <CountryPostCode forModel={forModel} mode={mode} />
     </Form>);
   }
-  const address = _.get(state, forModel);
   return <address>{zipLines(address)}</address>;
 };
 
