@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 const CountryPresentational = props =>
   (<span className="form-group">
-    <label className="control-label" htmlFor={props.name}>Postcode:</label>
-    <select className="form-control" {...props} readOnly={props.mode === 'readOnly'} >
+    <label className="control-label" htmlFor={props.name}>Country:</label>
+    <select className="form-control" id={props.name} {...props} readOnly={props.mode === 'readOnly'} >
       {props.countries.map(country => <option value={country.CountryCode}>{country.Name}</option>) }
     </select>
   </span>);

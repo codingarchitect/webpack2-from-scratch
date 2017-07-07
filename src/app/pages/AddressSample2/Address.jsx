@@ -4,6 +4,7 @@ import { Control, Errors, Form } from 'react-redux-form';
 
 import CountryPostCode from './CountryPostcode';
 import addressSchema from './address-schema';
+import LinePresentational from './Line.presentational';
 
 import './address.less';
 
@@ -13,26 +14,27 @@ const renderLines = (mode) => {
   return (
     Object.keys(properties).map((line) => {
       const isRequired = requiredLines.includes(line);
-      return (
-        <span className="form-group" key={line}>
-          <label className="control-label" htmlFor={`address.${line}`}>
-            {properties[line].title}{isRequired && '*'}
-          </label>
-          <Control.text
-            model={`.${line}`}
-            id={`address.${line}`}
-            className="form-control"
-            validators={{
-              required: lineVal => (isRequired ? lineVal && lineVal.length : true),
-            }}
-            readOnly={mode === 'readOnly'}
-          />
-          <Errors
-            model={`.${line}`}
+      const makeErrorsComponent = model =>
+        () =>
+          (<Errors
+            model={`.${model}`}
             wrapper="span"
             messages={{
               required: () => '*',
             }}
+          />);
+      return (
+        <span>
+          <Control.text
+            model={`.${line}`}
+            validators={{
+              required: lineVal => (isRequired ? lineVal && lineVal.length : true),
+            }}
+            mode={mode}
+            label={properties[line].title}
+            component={LinePresentational}
+            required={isRequired}
+            errorsComponent={makeErrorsComponent(line)}
           />
         </span>
       );

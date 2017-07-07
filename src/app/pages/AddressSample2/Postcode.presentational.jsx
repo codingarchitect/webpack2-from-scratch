@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const PostCodePresentational = props =>
   (<span className="form-group">
     <label className="control-label" htmlFor={props.name}>Postcode:</label>
-    <input className="form-control" readOnly={props.mode === 'readOnly'} {...props} />
+    <input className="form-control" id={props.name} readOnly={props.mode === 'readOnly'} {...props} />
   </span>);
 
 PostCodePresentational.propTypes = {
