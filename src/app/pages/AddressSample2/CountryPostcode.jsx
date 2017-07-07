@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Form, Control, Errors, actions } from 'react-redux-form';
 
 import messages from './messages';
+import labels from './labels';
 import PostcodePresentational from './Postcode.presentational';
 import CountryPresentational from './Country.presentational';
 
@@ -48,8 +49,15 @@ const CountryPostCode = ({ forModel, dispatch, intl, mode, countries }) => {
       mode={mode}
       component={CountryPresentational}
       countries={countries}
+      label={formatMessage(labels.addressCountry)}
     />
-    <Control.text model=".postcode" debounce={300} mode={mode} component={PostcodePresentational} />
+    <Control.text
+      model=".postcode"
+      debounce={300}
+      mode={mode}
+      component={PostcodePresentational}
+      label={formatMessage(labels.addressPostcode)}
+    />
     <Errors
       model={`${forModel}`}
       messages={{

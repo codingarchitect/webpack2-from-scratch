@@ -1,3 +1,6 @@
 { "en": {
-  "Address.invalidPostcodeFormat": "Invalid postcode format."
+  "Address.Postcode": "Postcode:",
+  "Address.Country": "Country:",
+  "Address.invalidPostcodeFormat": "Invalid postcode format.",
+  "Address.fieldIsRequired": "{fieldName} is required."
 } }

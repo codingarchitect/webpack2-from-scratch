@@ -1,0 +1,10 @@
+[
+  {
+    "id": "Address.Postcode",
+    "defaultMessage": "Postcode:"
+  },
+  {
+    "id": "Address.Country",
+    "defaultMessage": "Country:"
+  }
+]
