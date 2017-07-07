@@ -8,21 +8,22 @@ import LinePresentational from './Line.presentational';
 
 import './address.less';
 
+const makeErrorsComponent = model =>
+  () =>
+    (<Errors
+      model={`.${model}`}
+      wrapper="span"
+      messages={{
+        required: () => '*',
+      }}
+    />);
+
 const renderLines = (mode) => {
   const properties = addressSchema.properties;
   const requiredLines = addressSchema.required;
   return (
     Object.keys(properties).map((line) => {
       const isRequired = requiredLines.includes(line);
-      const makeErrorsComponent = model =>
-        () =>
-          (<Errors
-            model={`.${model}`}
-            wrapper="span"
-            messages={{
-              required: () => '*',
-            }}
-          />);
       return (
         <span>
           <Control.text
