@@ -7,6 +7,7 @@ import { Form, Control, Errors, actions } from 'react-redux-form';
 
 import messages from './messages';
 import PostcodePresentational from './Postcode.presentational';
+import CountryPresentational from './Country.presentational';
 
 const validatePostcode = (country, postcode, dispatch, forModel) => {
   if (country !== 'UK') return true;
@@ -23,7 +24,13 @@ const validatePostcode = (country, postcode, dispatch, forModel) => {
   return true;
 };
 
-const CountryPostCode = ({ forModel, dispatch, intl, mode }) => {
+function mapStateToProps(state) {
+  return {
+    countries: state.addressSample2.countries,
+  };
+}
+
+const CountryPostCode = ({ forModel, dispatch, intl, mode, countries }) => {
   const { formatMessage } = intl;
   return (<Form
     model={`${forModel}`}
@@ -36,16 +43,13 @@ const CountryPostCode = ({ forModel, dispatch, intl, mode }) => {
       },
     }}
   >
-    <span className="form-group">
-      <label className="control-label" htmlFor="address.postcode">Postcode:</label>
-      <Control.select className="form-control" model=".country" id="address.country" readOnly={mode === 'readOnly'} >
-        <option value="IN">India</option>
-        <option value="UK">United Kingdom</option>
-        <option value="US">United States</option>
-      </Control.select>
-    </span>
+    <Control.text
+      model=".country"
+      mode={mode}
+      component={CountryPresentational}
+      countries={countries}
+    />
     <Control.text model=".postcode" debounce={300} mode={mode} component={PostcodePresentational} />
-
     <Errors
       model={`${forModel}`}
       messages={{
@@ -61,10 +65,14 @@ CountryPostCode.propTypes = {
   dispatch: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired, // eslint-disable-line
   mode: PropTypes.string.isRequired,
+  countries: PropTypes.arrayOf(PropTypes.shape({
+    CountryCode: PropTypes.string.isRequired,
+    Name: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 CountryPostCode.defaultProps = {
   mode: 'edit',
 };
 
-export default connect(null)(injectIntl(CountryPostCode));
+export default connect(mapStateToProps)(injectIntl(CountryPostCode));

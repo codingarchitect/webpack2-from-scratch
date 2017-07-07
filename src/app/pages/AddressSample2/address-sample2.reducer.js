@@ -18,10 +18,22 @@ const initialBillingAddress = {
   country: 'UK',
 };
 
+const initialCountries = [{
+  CountryCode: 'IN',
+  Name: 'India',
+}, {
+  CountryCode: 'UK',
+  Name: 'United Kingdom',
+}, {
+  CountryCode: 'US',
+  Name: 'United States',
+}];
+
 const reducer = combineForms({
   deliveryAddress: initialDeliveryAddress,
   invoiceAddress: initialInvoiceAddress,
   billingAddress: initialBillingAddress,
+  countries: initialCountries,
 }, 'addressSample2');
 
 export default reducer;
