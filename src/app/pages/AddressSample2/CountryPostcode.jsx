@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Form, Control, Errors, actions } from 'react-redux-form';
 
 import messages from './messages';
+import PostcodePresentational from './Postcode.presentational';
 
 const validatePostcode = (country, postcode, dispatch, forModel) => {
   if (country !== 'UK') return true;
@@ -43,16 +44,8 @@ const CountryPostCode = ({ forModel, dispatch, intl, mode }) => {
         <option value="US">United States</option>
       </Control.select>
     </span>
-    <span className="form-group">
-      <label className="control-label" htmlFor="address.postcode">Postcode:</label>
-      <Control.text
-        className="form-control"
-        model=".postcode"
-        id="address.postcode"
-        debounce={300}
-        readOnly={mode === 'readOnly'}
-      />
-    </span>
+    <Control.text model=".postcode" debounce={300} mode={mode} component={PostcodePresentational} />
+
     <Errors
       model={`${forModel}`}
       messages={{
