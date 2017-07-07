@@ -57,7 +57,7 @@ const Address = ({ forModel, mode, state }) => {
     </Form>);
   }
   const address = _.get(state, forModel);
-  return <span>{zipLines(address)}</span>;
+  return <address>{zipLines(address)}</address>;
 };
 
 function mapStateToProps(state) {
