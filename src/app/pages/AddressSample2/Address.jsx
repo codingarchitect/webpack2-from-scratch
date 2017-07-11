@@ -51,6 +51,9 @@ const renderLines = (mode, address) => {
 const zipLines = address => [address.address1, address.address2, address.address3, address.address4,
   address.address5, address.address6, address.postcode, address.country].filter(line => line).join(', ');
 
+/**
+ * Address component
+ */
 const Address = ({ forModel, mode, state }) => {
   const address = _.get(state, forModel);
   if (mode !== 'singleLine') {
@@ -69,8 +72,13 @@ function mapStateToProps(state) {
 }
 
 Address.propTypes = {
+  /** Path to address in store ex: addressSample2.invoiceAddress */
   forModel: PropTypes.string.isRequired,
+  /** @ignore */
   state: PropTypes.object.isRequired, // eslint-disable-line
+  /** Address component display mode, can be readOnly, singleLine, edit, new
+   *  Default is edit
+   */
   mode: PropTypes.string.isRequired,
 };
 
